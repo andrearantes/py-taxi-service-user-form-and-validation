@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>{{ object.username }}</h1>
+  <p><strong>First name:</strong> {{ object.first_name }}</p>
+  <p><strong>Last name:</strong> {{ object.last_name }}</p>
+  <p><strong>License number:</strong> {{ object.license_number }}</p>
+
+  <a href="{% url 'taxi:driver-update' object.pk %}" class="btn btn-primary">Update license</a>
+  <a href="{% url 'taxi:driver-delete' object.pk %}" class="btn btn-danger">Delete</a>
+{% endblock %}
