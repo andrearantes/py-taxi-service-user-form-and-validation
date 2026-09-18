@@ -8,13 +8,14 @@ class DriverCreationForm(UserCreationForm):
     license_number = forms.CharField(
         max_length=8,
         label="characters license_number",
-        widget=forms.TextInput(attrs={"placeholder": "Entry 8 characters of license"}),
+        widget=forms.TextInput(attrs={
+            "placeholder": "Entry 8 characters of license"}),
     )
 
     class Meta(UserCreationForm.Meta):
         model = Driver
-        fields = UserCreationForm.Meta.fields + ("license_number",)
-        labels = {"license_number": "Characters license_number",}
+        fields = UserCreationForm.Meta.fields + ("license_number", )
+        labels = {"license_number": "Characters license_number", }
 
     def clean_license_number(self):
         license_number = self.cleaned_data.get("license_number")
@@ -26,7 +27,9 @@ class DriverCreationForm(UserCreationForm):
         last_5 = license_number[-5:]
 
         if not first_3.isupper() or not first_3.isalpha():
-            raise ValidationError("First 3 characters must be uppercase letters.")
+            raise ValidationError(
+                "First 3 characters must be uppercase letters."
+            )
 
         if not last_5.isdigit():
             raise ValidationError("Last 5 characters must be digits.")
@@ -43,7 +46,7 @@ class DriverLicenseUpdateForm(forms.ModelForm):
     class Meta:
         model = Driver
         fields = ("license_number",)
-        labels = {"license_number": "Characters license_number",}
+        labels = {"license_number": "Characters license_number", }
 
     def clean_license_number(self):
         license_number = self.cleaned_data.get("license_number")
@@ -55,7 +58,8 @@ class DriverLicenseUpdateForm(forms.ModelForm):
         last_5 = license_number[-5:]
 
         if not first_3.isupper() or not first_3.isalpha():
-            raise ValidationError("First 3 characters must be uppercase letters.")
+            raise ValidationError("First 3 characters must be uppercase"
+                                  " letters.")
 
         if not last_5.isdigit():
             raise ValidationError("Last 5 characters must be digits.")
