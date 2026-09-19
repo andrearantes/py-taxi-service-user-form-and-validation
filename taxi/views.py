@@ -89,6 +89,7 @@ class CarDetailView(LoginRequiredMixin, generic.DetailView):
         car = self.get_object()
         if self.request.user.is_authenticated:
             context["is_driver"] = self.request.user in car.drivers.all()
+
             return context
 
 

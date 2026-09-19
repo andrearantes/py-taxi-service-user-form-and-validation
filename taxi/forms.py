@@ -50,7 +50,6 @@ class DriverCreationForm(UserCreationForm):
         if (Driver.objects.filter(license_number=license_number)
                 .exclude(pk=current_driver_id).exists()):
             raise ValidationError("This license already exists.")
-
         return license_number
 
 
