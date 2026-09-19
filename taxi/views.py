@@ -31,23 +31,23 @@ def index(request):
     return render(request, "taxi/index.html", context=context)
 
 
-class DriverCreateView(CreateView):
+class DriverCreateView(LoginRequiredMixin, CreateView):
     model = Driver
     form_class = DriverCreationForm
     template_name = "taxi/driver_form.html"
     success_url = reverse_lazy("taxi:driver-list")
 
 
-class DriverUpdateLicenseView(UpdateView):
+class DriverUpdateLicenseView(LoginRequiredMixin, UpdateView):
     model = Driver
     form_class = DriverLicenseUpdateForm
     template_name = "taxi/driver_form.html"
     success_url = reverse_lazy("taxi:driver-list")
 
 
-class DriverDeleteView(DeleteView):
+class DriverDeleteView(LoginRequiredMixin, DeleteView):
     model = Driver
-    template_name = "taxi/driver_confirm_delete.html"
+    template_name = "taxi/driver_delete.html"
     success_url = reverse_lazy("taxi:driver-list")
 
 
